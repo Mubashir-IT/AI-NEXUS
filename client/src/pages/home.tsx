@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
-import { ArrowRight, Bot, Zap, BarChart3, Shield, Sparkles, Check, Play, Star, Quote, Globe, Cpu, Layers, Zap as FastIcon, Users, Building } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Bot, Zap, BarChart3, Shield, Sparkles, Check, Play, Star, Quote, Globe, Cpu, Layers, Zap as FastIcon, Users, Building, Send, MessageSquare, Terminal } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { useState, useRef, useEffect } from "react";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -19,6 +20,105 @@ const staggerContainer = {
       staggerChildren: 0.2
     }
   }
+};
+
+const MockAIChat = () => {
+  const [messages, setMessages] = useState([
+    { role: 'ai', content: 'Hello! I am Nexus AI. How can I help you automate your workflow today?' }
+  ]);
+  const [input, setInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, isTyping]);
+
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const userMsg = input;
+    setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+    setInput('');
+    setIsTyping(true);
+
+    // Simulate AI response
+    setTimeout(() => {
+      setIsTyping(false);
+      const responses = [
+        "I've analyzed your workflow. I can reduce your processing time by 45% using autonomous agents.",
+        "Based on your data, the most efficient route is to integrate our Predictive Analytics module.",
+        "Security check complete. Your current infrastructure meets all SOC2 requirements with Nexus Shield.",
+        "I've generated a draft API implementation for your custom model. Would you like to see it?"
+      ];
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      setMessages(prev => [...prev, { role: 'ai', content: randomResponse }]);
+    }, 1500);
+  };
+
+  return (
+    <Card className="w-full max-w-lg mx-auto border-zinc-200 dark:border-zinc-800 shadow-2xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-[2.5rem] overflow-hidden flex flex-col h-[500px]">
+      <CardHeader className="border-b border-zinc-100 dark:border-zinc-800 p-6 bg-zinc-50/50 dark:bg-zinc-800/50">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-violet-600 rounded-xl flex items-center justify-center text-white">
+            <Bot className="w-6 h-6" />
+          </div>
+          <div>
+            <CardTitle className="text-lg">Nexus Assistant</CardTitle>
+            <CardDescription className="flex items-center gap-1.5">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              Online & Ready
+            </CardDescription>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth" ref={scrollRef}>
+        <AnimatePresence initial={false}>
+          {messages.map((msg, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              <div className={`max-w-[80%] p-4 rounded-2xl text-sm ${
+                msg.role === 'user' 
+                ? 'bg-violet-600 text-white rounded-tr-none' 
+                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-tl-none'
+              }`}>
+                {msg.content}
+              </div>
+            </motion.div>
+          ))}
+          {isTyping && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
+              <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-2xl rounded-tl-none flex gap-1">
+                <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce"></span>
+                <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </CardContent>
+      <CardFooter className="p-4 border-t border-zinc-100 dark:border-zinc-800">
+        <form onSubmit={handleSend} className="flex w-full gap-2">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask anything..."
+            className="flex-1 bg-zinc-100 dark:bg-zinc-800 border-none rounded-xl px-4 text-sm focus:ring-2 focus:ring-violet-500 outline-none"
+          />
+          <Button type="submit" size="icon" className="bg-violet-600 hover:bg-violet-700 rounded-xl">
+            <Send className="w-4 h-4" />
+          </Button>
+        </form>
+      </CardFooter>
+    </Card>
+  );
 };
 
 const Hero = () => {
@@ -75,36 +175,14 @@ const Hero = () => {
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "circOut" }}
-          className="relative hidden lg:block"
+          className="relative"
         >
-          <div className="relative z-10 p-4">
+          <div className="relative z-10">
             <div className="absolute inset-0 bg-violet-500/10 blur-[120px] rounded-full animate-pulse-slow"></div>
-            <motion.img 
-              src="/hero-illustration.png" 
-              alt="AI Core" 
-              className="relative z-10 w-full drop-shadow-[0_35px_35px_rgba(139,92,246,0.3)] animate-float"
-            />
-            
-            {/* Visual Stats */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8 }}
-              className="absolute -top-10 -right-10 bg-white dark:bg-zinc-900 p-6 rounded-3xl shadow-2xl border border-zinc-100 dark:border-zinc-800 z-20"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center">
-                  <FastIcon className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-3xl font-bold">0.4ms</div>
-                  <div className="text-sm text-zinc-500">Latency Rate</div>
-                </div>
-              </div>
-            </motion.div>
+            <MockAIChat />
           </div>
         </motion.div>
       </div>
