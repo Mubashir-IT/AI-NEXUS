@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { ArrowRight, Bot, Zap, BarChart3, Shield, Sparkles, Check, Play, Star, Quote } from "lucide-react";
+import { ArrowRight, Bot, Zap, BarChart3, Shield, Sparkles, Check, Play, Star, Quote, Globe, Cpu, Layers, Zap as FastIcon, Users, Building } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -23,15 +23,15 @@ const staggerContainer = {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white dark:bg-zinc-950">
+    <section className="relative min-h-[95vh] flex items-center pt-24 overflow-hidden bg-white dark:bg-zinc-950">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-        <div className="blob bg-violet-400 w-96 h-96 top-0 -left-20 animate-blob"></div>
-        <div className="blob bg-fuchsia-300 w-96 h-96 bottom-0 right-0 animate-blob animation-delay-2000"></div>
-        <div className="blob bg-cyan-300 w-80 h-80 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-blob animation-delay-4000"></div>
+        <div className="blob bg-violet-400 w-[500px] h-[500px] top-[-100px] left-[-100px] animate-blob"></div>
+        <div className="blob bg-fuchsia-300 w-[500px] h-[500px] bottom-[-100px] right-[-100px] animate-blob animation-delay-2000"></div>
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-white/50 to-white dark:via-zinc-950/50 dark:to-zinc-950"></div>
       </div>
 
-      <div className="container mx-auto px-4 z-10 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 z-10 grid lg:grid-cols-2 gap-16 items-center">
         <motion.div 
           initial="hidden"
           animate="visible"
@@ -39,65 +39,95 @@ const Hero = () => {
           className="max-w-3xl"
         >
           <motion.div variants={fadeInUp}>
-            <Badge variant="outline" className="mb-6 px-4 py-1.5 border-violet-200 bg-violet-50 text-violet-700 rounded-full text-sm font-medium">
+            <Badge variant="outline" className="mb-6 px-4 py-1.5 border-violet-200 bg-violet-50/50 text-violet-700 rounded-full text-sm font-medium backdrop-blur-sm">
               <Sparkles className="w-4 h-4 mr-2 inline" />
-              New Feature: Auto-Workflow 2.0
+              Revolutionizing Workflow Automation
             </Badge>
           </motion.div>
           
-          <motion.h1 variants={fadeInUp} className="text-5xl lg:text-7xl font-heading font-bold leading-tight tracking-tight mb-6 text-zinc-900 dark:text-white">
-            Build Faster with <br/>
-            <span className="text-gradient bg-linear-to-r from-violet-600 to-fuchsia-600">Intelligent AI</span>
+          <motion.h1 variants={fadeInUp} className="text-6xl lg:text-8xl font-heading font-bold leading-[1.1] tracking-tight mb-8 text-zinc-900 dark:text-white">
+            The OS for <br/>
+            <span className="text-gradient bg-linear-to-r from-violet-600 via-fuchsia-500 to-indigo-600">AI Intelligence</span>
           </motion.h1>
           
-          <motion.p variants={fadeInUp} className="text-xl text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed max-w-lg">
-            Harness the power of advanced machine learning to automate your workflow, analyze data instantly, and scale your operations without the headache.
+          <motion.p variants={fadeInUp} className="text-2xl text-zinc-600 dark:text-zinc-400 mb-10 leading-relaxed max-w-xl">
+            Nexus is the unified platform to deploy, manage, and scale autonomous AI agents that transform your business data into revenue.
           </motion.p>
           
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-zinc-900 text-white hover:bg-zinc-800 h-14 px-8 rounded-xl text-lg shadow-xl shadow-violet-500/20 transition-transform hover:scale-105">
-              Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-5">
+            <Button size="lg" className="bg-zinc-900 text-white hover:bg-zinc-800 h-16 px-10 rounded-2xl text-xl shadow-2xl shadow-violet-500/20 transition-all hover:scale-105 active:scale-95">
+              Start Building <ArrowRight className="ml-2 w-6 h-6" />
             </Button>
-            <Button size="lg" variant="outline" className="h-14 px-8 rounded-xl text-lg border-zinc-200 hover:bg-zinc-50 hover:text-zinc-900 transition-all">
-              <Play className="mr-2 w-5 h-5 fill-current" /> Watch Demo
+            <Button size="lg" variant="outline" className="h-16 px-10 rounded-2xl text-xl border-zinc-200 hover:bg-zinc-50 hover:text-zinc-900 transition-all backdrop-blur-sm">
+              <Play className="mr-2 w-6 h-6 fill-current" /> View Demo
             </Button>
+          </motion.div>
+          
+          <motion.div variants={fadeInUp} className="mt-16 pt-10 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center gap-10 opacity-60">
+            <span className="text-sm font-bold uppercase tracking-widest text-zinc-400">Trusted by</span>
+            <div className="flex gap-8 items-center">
+              <Building className="w-8 h-8" />
+              <Globe className="w-8 h-8" />
+              <Layers className="w-8 h-8" />
+              <Cpu className="w-8 h-8" />
+            </div>
           </motion.div>
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "circOut" }}
           className="relative hidden lg:block"
         >
-          <motion.img 
-            src="/hero-illustration.png" 
-            alt="AI Visualization" 
-            className="relative z-10 w-full drop-shadow-2xl animate-float"
-          />
+          <div className="relative z-10 p-4">
+            <div className="absolute inset-0 bg-violet-500/10 blur-[120px] rounded-full animate-pulse-slow"></div>
+            <motion.img 
+              src="/hero-illustration.png" 
+              alt="AI Core" 
+              className="relative z-10 w-full drop-shadow-[0_35px_35px_rgba(139,92,246,0.3)] animate-float"
+            />
+            
+            {/* Visual Stats */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8 }}
+              className="absolute -top-10 -right-10 bg-white dark:bg-zinc-900 p-6 rounded-3xl shadow-2xl border border-zinc-100 dark:border-zinc-800 z-20"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center">
+                  <FastIcon className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="text-3xl font-bold">0.4ms</div>
+                  <div className="text-sm text-zinc-500">Latency Rate</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
   );
 };
 
-const Features = () => {
-  const features = [
-    { icon: <Bot className="w-6 h-6" />, title: "Natural Language Processing", description: "Understand and process human language with unprecedented accuracy." },
-    { icon: <BarChart3 className="w-6 h-6" />, title: "Predictive Analytics", description: "Forecast trends and make data-driven decisions." },
-    { icon: <Shield className="w-6 h-6" />, title: "Enterprise Security", description: "Bank-grade encryption and compliance standards." }
+const Stats = () => {
+  const stats = [
+    { label: "Active Agents", value: "2.4M+" },
+    { label: "Data Points", value: "850B" },
+    { label: "Cost Savings", value: "62%" },
+    { label: "Uptime", value: "99.99%" },
   ];
 
   return (
-    <section className="py-24 bg-zinc-50 dark:bg-zinc-900">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl font-heading font-bold mb-16">Core <span className="text-violet-600">Capabilities</span></h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((f, i) => (
-            <div key={i} className="p-8 bg-white dark:bg-zinc-800 rounded-3xl border border-zinc-100 dark:border-zinc-700 shadow-sm">
-              <div className="w-12 h-12 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center mx-auto mb-6">{f.icon}</div>
-              <h3 className="text-xl font-bold mb-4">{f.title}</h3>
-              <p className="text-zinc-600 dark:text-zinc-400">{f.description}</p>
+    <section className="py-20 bg-white dark:bg-zinc-950 border-y border-zinc-100 dark:border-zinc-800">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+          {stats.map((s, i) => (
+            <div key={i}>
+              <div className="text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white mb-2">{s.value}</div>
+              <div className="text-zinc-500 font-medium uppercase tracking-wider text-sm">{s.label}</div>
             </div>
           ))}
         </div>
@@ -106,12 +136,162 @@ const Features = () => {
   );
 };
 
+const FeatureGrid = () => {
+  const items = [
+    {
+      icon: <Cpu className="w-8 h-8" />,
+      title: "Neural Engine",
+      desc: "Process complex logic with our custom-trained LLM optimized for speed.",
+      tag: "Infrastructure"
+    },
+    {
+      icon: <Layers className="w-8 h-8" />,
+      title: "Contextual Memory",
+      desc: "Our agents remember every interaction to provide perfect continuity.",
+      tag: "Memory"
+    },
+    {
+      icon: <Globe className="w-8 h-8" />,
+      title: "Global Distribution",
+      desc: "Deploy agents to the edge for sub-millisecond response times worldwide.",
+      tag: "Network"
+    },
+    {
+      icon: <Shield className="w-8 h-8" />,
+      title: "Ironclad Privacy",
+      desc: "Your data never leaves your infrastructure with our hybrid-cloud model.",
+      tag: "Security"
+    }
+  ];
+
+  return (
+    <section className="py-32 bg-zinc-50 dark:bg-zinc-900/50">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+          <div className="max-w-2xl">
+            <Badge className="mb-6 bg-violet-600 text-white">Next Gen Tools</Badge>
+            <h2 className="text-5xl font-heading font-bold mb-6">Designed for the <span className="text-violet-600">AI-First</span> Era</h2>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400">Stop stitching APIs together. Start building with a unified stack designed for autonomous intelligence.</p>
+          </div>
+          <Button variant="outline" size="lg" className="h-14 px-8 rounded-xl font-bold">Explore Features</Button>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {items.map((item, i) => (
+            <motion.div 
+              key={i}
+              whileHover={{ y: -10 }}
+              className="p-10 rounded-[2.5rem] bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-sm hover:shadow-2xl transition-all group"
+            >
+              <div className="w-16 h-16 bg-violet-50 dark:bg-violet-900/20 rounded-3xl flex items-center justify-center text-violet-600 mb-8 group-hover:bg-violet-600 group-hover:text-white transition-colors">
+                {item.icon}
+              </div>
+              <Badge className="mb-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-none">{item.tag}</Badge>
+              <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+              <p className="text-zinc-500 leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Testimonials = () => {
+  const list = [
+    {
+      name: "Alex Rivera",
+      role: "CEO at Vanta",
+      quote: "Nexus reduced our engineering overhead by 40% in just three months. It's the standard for AI deployment.",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
+    },
+    {
+      name: "Jamie Smith",
+      role: "Head of AI, Stripe",
+      quote: "The low latency and privacy controls are light years ahead of anything else on the market today.",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jamie"
+    },
+    {
+      name: "Sarah Kim",
+      role: "Founder of Scale",
+      quote: "Finally a platform that treats AI agents like first-class citizens. The DX is incredible.",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+    }
+  ];
+
+  return (
+    <section className="py-32 bg-white dark:bg-zinc-950">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="text-5xl font-heading font-bold mb-8 italic text-zinc-900 dark:text-white">"The future of software is autonomous, and Nexus is the engine."</h2>
+          <div className="w-20 h-1 bg-violet-600 mx-auto"></div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-10">
+          {list.map((t, i) => (
+            <Card key={i} className="border-none bg-zinc-50 dark:bg-zinc-900 rounded-[3rem] p-10 hover:shadow-xl transition-all">
+              <CardHeader className="p-0 mb-8">
+                <div className="flex gap-1 mb-6">
+                  {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 fill-violet-600 text-violet-600" />)}
+                </div>
+                <p className="text-xl text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed italic">"{t.quote}"</p>
+              </CardHeader>
+              <CardFooter className="p-0 flex items-center gap-5">
+                <img src={t.avatar} className="w-14 h-14 rounded-2xl border-2 border-white" alt="" />
+                <div>
+                  <div className="font-bold text-lg">{t.name}</div>
+                  <div className="text-zinc-500 text-sm">{t.role}</div>
+                </div>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const FinalCTA = () => {
+  return (
+    <section className="py-20 bg-white dark:bg-zinc-950 px-4">
+      <div className="container mx-auto">
+        <div className="relative overflow-hidden bg-zinc-900 dark:bg-zinc-900 rounded-[4rem] p-16 lg:p-32 text-center shadow-3xl">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-violet-600/20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-fuchsia-600/20 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="relative z-10"
+          >
+            <h2 className="text-5xl lg:text-7xl font-heading font-bold text-white mb-10 leading-tight">
+              Ready to automate <br/> <span className="text-violet-400">your future?</span>
+            </h2>
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
+              <Button size="lg" className="bg-white text-zinc-900 hover:bg-zinc-100 h-16 px-12 rounded-2xl text-xl font-bold shadow-xl transition-transform hover:scale-105">
+                Start Free Trial
+              </Button>
+              <Button size="lg" variant="outline" className="border-zinc-700 text-white hover:bg-zinc-800 h-16 px-12 rounded-2xl text-xl font-bold transition-all">
+                Talk to Sales
+              </Button>
+            </div>
+            <p className="mt-10 text-zinc-500 text-lg">No credit card required. Cancel anytime.</p>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white font-sans selection:bg-violet-200 selection:text-violet-900">
       <Navbar />
       <Hero />
-      <Features />
+      <Stats />
+      <FeatureGrid />
+      <Testimonials />
+      <FinalCTA />
       <Footer />
     </div>
   );
